@@ -45,7 +45,22 @@ dakota-scraper --start-month 2026-03 --end-month 2027-02
 
 ## Scheduling (cron)
 
-Example monthly run at 2:15 AM on the first day of each month:
+Daily run (recommended):
+
+```bash
+chmod +x /home/john/git-repos/dakota-jazz-calendar/scripts/run_daily.sh
+crontab -e
+```
+
+Add this line to run every day at 2:15 AM server time:
+
+```cron
+15 2 * * * /home/john/git-repos/dakota-jazz-calendar/scripts/run_daily.sh
+```
+
+The job writes logs to `/home/john/git-repos/dakota-jazz-calendar/logs/`.
+
+Legacy monthly example:
 
 ```cron
 15 2 1 * * cd /home/john/git-repos/dakota-jazz-calendar && /home/john/git-repos/dakota-jazz-calendar/.venv/bin/dakota-scraper --start-month $(date +\%Y-\%m) --end-month $(date -d '+1 month' +\%Y-\%m)
