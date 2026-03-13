@@ -27,3 +27,9 @@ def test_canonical_source_strips_trailing_show_index() -> None:
     assert _canonical_source_for_dedupe(
         "https://www.dakotacooks.com/event/example/2026-03-01/2/"
     ) == "https://www.dakotacooks.com/event/example/2026-03-01/"
+
+
+def test_canonical_source_preserves_base_occurrence_url() -> None:
+    assert _canonical_source_for_dedupe(
+        "https://www.dakotacooks.com/event/example/2026-03-01/"
+    ) == "https://www.dakotacooks.com/event/example/2026-03-01/"
