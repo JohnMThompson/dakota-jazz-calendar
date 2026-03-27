@@ -23,6 +23,9 @@ dev = [
 [project.scripts]
 dakota-scraper = "scraper.cli:main"
 
+[tool.setuptools]
+packages = ["scraper"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
