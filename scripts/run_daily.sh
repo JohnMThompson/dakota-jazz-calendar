@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO_DIR="/home/john/git-repos/dakota-jazz-calendar"
+REPO_DIR="/opt/dakota-jazz-calendar"
 LOG_DIR="$REPO_DIR/logs"
 LOCK_FILE="$REPO_DIR/.daily_scrape.lock"
 
@@ -23,7 +23,7 @@ source "$REPO_DIR/.env"
 set +a
 
 START_MONTH="$(date +%Y-%m)"
-END_MONTH="$(date -d '+1 month' +%Y-%m)"
+END_MONTH="$(date -d '+12 month' +%Y-%m)"
 LOG_FILE="$LOG_DIR/dakota_scrape_$(date +%F).log"
 
-python3 -m scraper.cli --start-month "$START_MONTH" --end-month "$END_MONTH" >> "$LOG_FILE" 2>&1
+/opt/dakota-jazz-calendar/.venv/bin/python3 -m scraper.cli --start-month "$START_MONTH" --end-month "$END_MONTH" >> "$LOG_FILE" 2>&1
