@@ -2,6 +2,9 @@
 
 Scrapes the Dakota event calendar and upserts event rows into MySQL.
 
+<img width="1279" height="909" alt="image" src="https://github.com/user-attachments/assets/fe030a75-4a91-4c49-a6e1-7f601b617a1a" />
+
+
 ## Captured Fields
 
 - `event_date`
