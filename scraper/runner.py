@@ -4,6 +4,8 @@ import logging
 import re
 from datetime import date, datetime
 
+import requests
+
 from scraper.http_client import HttpClient
 from scraper.models import EventOccurrence, ScrapedEventRow
 from scraper.parser import (
@@ -48,7 +50,17 @@ def scrape_range(start_month: str, end_month: str, logger: logging.Logger) -> li
     for year, month in months:
         month_url = BASE_MONTH_URL.format(year=year, month=month)
         logger.info("Fetching month page: %s", month_url)
-        month_html = client.get_text(month_url)
+        try:
+            month_html = client.get_text(month_url)
+        except requests.HTTPError as exc:
+            if exc.response is not None and exc.response.status_code == 404:
+                logger.info(
+                    "No published calendar page for %04d-%02d; ending month scan",
+                    year,
+                    month,
+                )
+                break
+            raise
         occurrences = parse_month_occurrences(month_html, month_url)
         logger.info("Discovered %d occurrence(s) in %04d-%02d", len(occurrences), year, month)
         for occurrence in occurrences:
