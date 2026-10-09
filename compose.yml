@@ -1,0 +1,8 @@
+
+services:
+  dakota-scraper:
+    build: .
+    image: dakota-jazz-calendar:local
+    restart: "no"
+    env_file:
+      - .env
