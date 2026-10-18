@@ -1,4 +1,3 @@
-
 services:
   dakota-scraper:
     build: .
@@ -6,3 +5,11 @@ services:
     restart: "no"
     env_file:
       - .env
+    networks:
+      - default
+      - mysql
+
+networks:
+  mysql:
+    external: true
+    name: mysql

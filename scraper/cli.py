@@ -6,7 +6,7 @@ import sys
 from datetime import datetime
 
 from scraper.config import load_db_config
-from scraper.db import connect, ensure_schema, upsert_events
+from scraper.db import connect, upsert_events
 from scraper.runner import scrape_range
 
 
@@ -42,7 +42,6 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         db_config = load_db_config()
         with connect(db_config) as connection:
-            ensure_schema(connection)
             count = upsert_events(connection, events)
         logger.info("Upsert complete. %d row(s) processed.", count)
         return 0
